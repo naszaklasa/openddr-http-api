@@ -1,14 +1,13 @@
 package pl.nk.warehouse.openddr;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -39,7 +38,16 @@ public class APIHttpHandler implements HttpHandler {
 			for (int i = 0; i < params.length; ++i) {
 				if (params[i].equals(Configuration.UA_PARAMETER)) {
 					if (i + 1 < params.length) {
-						System.out.println(params[i + 1]);
+						
+						String ua = URLDecoder.decode(params[i+1], "UTF-8");
+						
+						HashMap<String, String> hm = client.getAttributes(ua);
+						
+						Gson gson = new Gson();
+						String result = gson.toJson(hm);
+						
+						System.out.println(result);
+						responseBody.write(result.getBytes());
 					}
 				}
 			}

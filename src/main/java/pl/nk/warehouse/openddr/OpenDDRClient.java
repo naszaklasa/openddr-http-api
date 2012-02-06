@@ -16,8 +16,7 @@ import org.w3c.ddr.simple.exception.ValueException;
 
 /**
  * OpenDDR API cilent. 1. Loads all required datasources (information about
- * devices)
- * 2. 
+ * devices) 2.
  * 
  * @author w
  * 
@@ -25,22 +24,23 @@ import org.w3c.ddr.simple.exception.ValueException;
 public class OpenDDRClient {
 
 	private Service identificationService = null;
-	
+	Properties initializationProperties;
+
 	private PropertyRef vendorRef;
 	private PropertyRef modelRef;
 	private PropertyRef displayWidthRef;
 	private PropertyRef displayHeightRef;
-	
+
 	private PropertyRef[] propertyRefs;
-	
+
 	Evidence e;
-	
+
 	public OpenDDRClient() {
-		System.out.println("Initialize filter");
-		Properties initializationProperties = new Properties();
+		System.out.println("Initializing API");
+		initializationProperties = new Properties();
 
 		try {
-			initializationProperties.load(getClass().getResourceAsStream("/oddr.properties"));
+			initializationProperties.load(getClass().getClassLoader().getResourceAsStream("oddr.properties"));
 			identificationService = ServiceFactory.newService("org.openddr.simpleapi.oddr.ODDRService", initializationProperties.getProperty(ODDRService.ODDR_VOCABULARY_IRI), initializationProperties);
 
 		} catch (Exception ex) {
@@ -58,16 +58,20 @@ public class OpenDDRClient {
 		}
 
 		propertyRefs = new PropertyRef[] { vendorRef, modelRef, displayWidthRef, displayHeightRef };
-		
+
+		System.out.println("API initialized");
 	}
 
 	public HashMap<String, String> getAttributes(String useragent) {
+
+		System.out.println("new query, ua:" + useragent);
 
 		e = new ODDRHTTPEvidence();
 		e.put("User-Agent", useragent);
 
 		HashMap<String, String> hm = new HashMap<String, String>();
 
+		System.out.println("before try");
 		try {
 			PropertyValues propertyValues = identificationService.getPropertyValues(e, propertyRefs);
 			PropertyValue vendor = propertyValues.getValue(vendorRef);
@@ -75,17 +79,27 @@ public class OpenDDRClient {
 			PropertyValue displayWidth = propertyValues.getValue(displayWidthRef);
 			PropertyValue displayHeight = propertyValues.getValue(displayHeightRef);
 
-			hm.put("vendor", vendor.getString());
-			hm.put("model", model.getString());
-			hm.put("displayWidth", displayWidth.getString());
-			hm.put("displayHeight", displayHeight.getString());
+			if (vendor.exists()) {
+				hm.put("vendor", vendor.getString());
+			}
+			if (model.exists()) {
+				hm.put("model", model.getString());
+			}
+			if (displayWidth.exists()) {
+				hm.put("displayWidth", displayWidth.getString());
+			}
+			if (displayHeight.exists()) {
+				hm.put("displayHeight", displayHeight.getString());
+			}
 
 		} catch (NameException ex) {
+			ex.printStackTrace();
 			throw new RuntimeException(ex);
 		} catch (ValueException ex) {
+			ex.printStackTrace();
 			throw new RuntimeException(ex);
 		}
-		
+
 		return hm;
 	}
 
