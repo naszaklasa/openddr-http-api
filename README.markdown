@@ -1,7 +1,9 @@
 This project is a HTTP server that allows querying OpenDDR API/database in more efficient manner.
 HTTP server by default runs at port 6522,
 to query it use:
+
 http://localhost:6522/?ua=Mozilla/5.0%20(iPhone;%20U;%20CPU%20iPhone%20OS%204_2_1%20like%20Mac%20OS%20X;%20pl-pl)%20AppleWebKit/533.17.9%20(KHTML,%20like%20Gecko)%20Version/5.0.2%20Mobile/8C148%20Safari/6533.18.5
+
 example result is:
 `{"model":"iPhone","vendor":"Apple","displayWidth":"320","displayHeight":"480"}` 
 
@@ -20,10 +22,10 @@ example result is:
 
 3. add DDR-Simple-API.jar from lib directory to maven
 
-w@w:~/OpenDDR-1.0.0.2/lib$ mvn install:install-file -Dfile=DDR-Simple-API.jar -DgroupId=org.openddr -DartifactId=simple-api -Dversion=1.0.0.2 -Dpackaging=jar
+`w@w:~/OpenDDR-1.0.0.2/lib$ mvn install:install-file -Dfile=DDR-Simple-API.jar -DgroupId=org.openddr -DartifactId=simple-api -Dversion=1.0.0.2 -Dpackaging=jar`
 
 you should see something like this:
-
+`
 [INFO] Scanning for projects...
 [INFO] Searching repository for plugin with prefix: 'install'.
 [INFO] org.apache.maven.plugins: checking for updates from central
@@ -43,15 +45,16 @@ you should see something like this:
 [INFO] Finished at: Fri Feb 03 14:03:52 CET 2012
 [INFO] Final Memory: 4M/72M
 [INFO] ------------------------------------------------------------------------
-
+`
 4. add maven dependency:
+`
 <dependency>
 	<groupId>org.openddr</groupId>
 	<artifactId>simple-api</artifactId>
 	<version>1.0.0.2</version>
 </dependency>
-
-5. fix one error on in VocabularyHolder class (change import from import org.apache.commons.lang.ArrayUtils to import org.apache.commons.lang3.ArrayUtils)
+`
+5. fix one error on in VocabularyHolder class (change import from `import org.apache.commons.lang.ArrayUtils` to `import org.apache.commons.lang3.ArrayUtils`)
 
 6. note that resource files (xml files with attributes) are not included with this release, they are located in resources directory in previously unpacked archive
 
