@@ -1,3 +1,14 @@
+This project is a HTTP server that allows querying OpenDDR API/database in more efficient manner.
+
+#USAGE MANUAL:
+1. clone this project
+2. change paths in `oddr.properties` file to match your configuration
+3. modify properties in `Configuration` class
+4. `mvn package` it
+5. run `java -cp target/openddr-http.jar pl.nk.warehouse.openddr.OpenDDRServer`
+
+#DEVELOPMENT MANUAL:
+
 1. download OpenDDR-1.0.0.2.zip from http://openddr.org
 
 2. unpack it
@@ -38,3 +49,4 @@ you should see something like this:
 5. fix one error on in VocabularyHolder class (change import from import org.apache.commons.lang.ArrayUtils to import org.apache.commons.lang3.ArrayUtils)
 
 6. note that resource files (xml files with attributes) are not included with this release, they are located in resources directory in previously unpacked archive
+
