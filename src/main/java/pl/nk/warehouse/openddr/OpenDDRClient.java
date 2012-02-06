@@ -30,6 +30,17 @@ public class OpenDDRClient {
 	private PropertyRef modelRef;
 	private PropertyRef displayWidthRef;
 	private PropertyRef displayHeightRef;
+	private PropertyRef marketingNameRef;
+	private PropertyRef deviceOSVersionRef;
+	private PropertyRef deviceOSRef;
+	private PropertyRef fullFlashSupportRef;
+	private PropertyRef mobileBrowserRef;
+	private PropertyRef wifiRef;
+	private PropertyRef releaseDateRef;
+	private PropertyRef mobileBrowserVersionRef;
+	private PropertyRef inputDevicesRef;
+//	private PropertyRef parentRef;
+	private PropertyRef idRef;
 
 	private PropertyRef[] propertyRefs;
 
@@ -52,12 +63,24 @@ public class OpenDDRClient {
 			modelRef = identificationService.newPropertyRef("model");
 			displayWidthRef = identificationService.newPropertyRef("displayWidth");
 			displayHeightRef = identificationService.newPropertyRef("displayHeight");
+			marketingNameRef = identificationService.newPropertyRef("marketing_name");
+			deviceOSVersionRef = identificationService.newPropertyRef("device_os_version");
+			deviceOSRef = identificationService.newPropertyRef("device_os");
+			fullFlashSupportRef = identificationService.newPropertyRef("full_flash_support");
+			mobileBrowserRef = identificationService.newPropertyRef("mobile_browser");
+			wifiRef = identificationService.newPropertyRef("wifi");
+			releaseDateRef = identificationService.newPropertyRef("release_date");
+			mobileBrowserVersionRef = identificationService.newPropertyRef("mobile_browser_version");
+			inputDevicesRef = identificationService.newPropertyRef("inputDevices");
+			idRef = identificationService.newPropertyRef("id");
+//			parentRef = identificationService.newPropertyRef("parentId");
 
 		} catch (NameException ex) {
+			ex.printStackTrace();
 			throw new RuntimeException(ex);
 		}
 
-		propertyRefs = new PropertyRef[] { vendorRef, modelRef, displayWidthRef, displayHeightRef };
+		propertyRefs = new PropertyRef[] { vendorRef, modelRef, displayWidthRef, displayHeightRef, marketingNameRef, deviceOSVersionRef, deviceOSRef, fullFlashSupportRef, mobileBrowserRef, wifiRef, releaseDateRef, mobileBrowserVersionRef, inputDevicesRef, idRef };
 
 		System.out.println("API initialized");
 	}
@@ -71,13 +94,23 @@ public class OpenDDRClient {
 
 		HashMap<String, String> hm = new HashMap<String, String>();
 
-		System.out.println("before try");
 		try {
 			PropertyValues propertyValues = identificationService.getPropertyValues(e, propertyRefs);
 			PropertyValue vendor = propertyValues.getValue(vendorRef);
 			PropertyValue model = propertyValues.getValue(modelRef);
 			PropertyValue displayWidth = propertyValues.getValue(displayWidthRef);
 			PropertyValue displayHeight = propertyValues.getValue(displayHeightRef);
+			PropertyValue marketingName = propertyValues.getValue(marketingNameRef);
+			PropertyValue deviceOSVersion = propertyValues.getValue(deviceOSVersionRef);
+			PropertyValue deviceOS = propertyValues.getValue(deviceOSRef);
+			PropertyValue fullFlashSupport = propertyValues.getValue(fullFlashSupportRef);
+			PropertyValue mobileBrowser = propertyValues.getValue(mobileBrowserRef);
+			PropertyValue wifi = propertyValues.getValue(wifiRef);
+			PropertyValue releaseDate = propertyValues.getValue(releaseDateRef);
+			PropertyValue mobileBrowserVersion = propertyValues.getValue(mobileBrowserVersionRef);
+			PropertyValue inputDevices = propertyValues.getValue(inputDevicesRef);
+			PropertyValue id = propertyValues.getValue(idRef);
+//			PropertyValue parent = propertyValues.getValue(parentRef);
 
 			if (vendor.exists()) {
 				hm.put("vendor", vendor.getString());
@@ -91,6 +124,40 @@ public class OpenDDRClient {
 			if (displayHeight.exists()) {
 				hm.put("displayHeight", displayHeight.getString());
 			}
+			if (marketingName.exists()) {
+				hm.put("marketingName", marketingName.getString());
+			}
+			if (deviceOSVersion.exists()) {
+				hm.put("deviceOSVersion", deviceOSVersion.getString());
+			}
+			if (deviceOS.exists()) {
+				hm.put("deviceOS", deviceOS.getString());
+			}
+			if (fullFlashSupport.exists()) {
+				hm.put("fullFlashSupport", fullFlashSupport.getString());
+			}
+			if (mobileBrowser.exists()) {
+				hm.put("mobileBrowser", mobileBrowser.getString());
+			}
+			if (wifi.exists()) {
+				hm.put("wifi", wifi.getString());
+			}
+			if (releaseDate.exists()) {
+				hm.put("releaseDate", releaseDate.getString());
+			}
+			if (mobileBrowserVersion.exists()) {
+				hm.put("mobileBrowserVersion", mobileBrowserVersion.getString());
+			}
+			if (inputDevices.exists()) {
+				hm.put("inputDevices", inputDevices.getString());
+			}
+			if (id.exists()) {
+				hm.put("id", id.getString());
+			}
+//			if (parent.exists()) {
+//				hm.put("parent", parent.getString());
+//			}
+			
 
 		} catch (NameException ex) {
 			ex.printStackTrace();
@@ -98,9 +165,12 @@ public class OpenDDRClient {
 		} catch (ValueException ex) {
 			ex.printStackTrace();
 			throw new RuntimeException(ex);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
+		
 		return hm;
+
 	}
 
 }

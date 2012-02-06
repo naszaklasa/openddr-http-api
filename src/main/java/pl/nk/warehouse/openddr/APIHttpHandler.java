@@ -19,9 +19,15 @@ import com.sun.net.httpserver.HttpHandler;
  */
 public class APIHttpHandler implements HttpHandler {
 	private OpenDDRClient client;
-
+	private Gson gson;
+	
+	public APIHttpHandler(){
+		gson = new Gson();
+	}
+	
 	public void handle(HttpExchange exchange) throws IOException {
 		System.out.println("new request");
+		
 		String requestMethod = exchange.getRequestMethod();
 		if (requestMethod.equalsIgnoreCase("GET")) {
 			Headers responseHeaders = exchange.getResponseHeaders();
@@ -42,8 +48,7 @@ public class APIHttpHandler implements HttpHandler {
 						String ua = URLDecoder.decode(params[i+1], "UTF-8");
 						
 						HashMap<String, String> hm = client.getAttributes(ua);
-						
-						Gson gson = new Gson();
+											
 						String result = gson.toJson(hm);
 						
 						System.out.println(result);
