@@ -30,7 +30,6 @@ public class OpenDDRHTTPClient {
 		
 		if (entity != null) {
 			returnedJson = EntityUtils.toString(entity);
-			
 		}
 		return returnedJson;
 	}
