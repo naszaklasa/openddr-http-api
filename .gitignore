@@ -4,3 +4,4 @@
 .svn/
 target/
 .svn*
+pom.xml
