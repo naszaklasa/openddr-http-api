@@ -87,8 +87,6 @@ public class OpenDDRClient {
 
 	public HashMap<String, String> getAttributes(String useragent) {
 
-		System.out.println("new query, ua:" + useragent);
-
 		e = new ODDRHTTPEvidence();
 		e.put("User-Agent", useragent);
 

@@ -5,7 +5,6 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import pl.nk.warehouse.openddr.common.Configuration;
 
@@ -28,7 +27,6 @@ public class APIHttpHandler implements HttpHandler {
 	}
 	
 	public void handle(HttpExchange exchange) throws IOException {
-		System.out.println("new request");
 		
 		String requestMethod = exchange.getRequestMethod();
 		if (requestMethod.equalsIgnoreCase("GET")) {
@@ -53,7 +51,6 @@ public class APIHttpHandler implements HttpHandler {
 											
 						String result = gson.toJson(hm);
 						
-						System.out.println(result);
 						responseBody.write(result.getBytes());
 					}
 				}
