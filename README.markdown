@@ -15,6 +15,7 @@ example result is:
 5. run `java -cp target/openddr-http.jar pl.nk.warehouse.openddr.OpenDDRServer`
 
 #DEVELOPMENT MANUAL:
+example pom.xml can be found here: https://gist.github.com/1760081
 
 1. download OpenDDR-1.0.0.2.zip from http://openddr.org
 

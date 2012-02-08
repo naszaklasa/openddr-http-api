@@ -37,5 +37,9 @@ public class OpenDDRHTTPClient {
 	public String getConnectionURL(String useragent){
 		return "http://" + Configuration.SERVER_HOST + ":" + Configuration.SERVER_PORT + "/?" + Configuration.UA_PARAMETER + "=" + useragent;
 	}
+	
+	public void setServerhost(String hostname){
+		Configuration.setServerHost(hostname);
+	}
 
 }
