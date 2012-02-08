@@ -20,9 +20,14 @@ public class OpenDDRServer {
 	    HttpServer server = HttpServer.create(addr, 0);
 	    
 	    APIHttpHandler apiHandler = new APIHttpHandler();
-	    apiHandler.setOpenDDRClient(new OpenDDRClient());
+	    OpenDDRClient client = new OpenDDRClient();
+	    
+	    apiHandler.setOpenDDRClient(client);
+	    
+	    APIMonitoringHandler monitoringHandler = new APIMonitoringHandler();
 	    
 	    server.createContext("/", apiHandler);
+	    server.createContext("/status", monitoringHandler);
 	    server.setExecutor(Executors.newCachedThreadPool());
 	    server.start();
 	    System.out.println("Server is listening on port " + Configuration.SERVER_PORT );
