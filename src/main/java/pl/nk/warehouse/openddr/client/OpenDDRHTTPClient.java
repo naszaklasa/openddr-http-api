@@ -1,6 +1,9 @@
 package pl.nk.warehouse.openddr.client;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,8 +37,8 @@ public class OpenDDRHTTPClient {
 		return returnedJson;
 	}
 	
-	public String getConnectionURL(String useragent){
-		return "http://" + Configuration.SERVER_HOST + ":" + Configuration.SERVER_PORT + "/?" + Configuration.UA_PARAMETER + "=" + useragent;
+	public String getConnectionURL(String useragent) throws UnsupportedEncodingException{
+		return "http://" + Configuration.SERVER_HOST + ":" + Configuration.SERVER_PORT + "/?" + Configuration.UA_PARAMETER + "=" + URLEncoder.encode(useragent, "UTF-8");
 	}
 	
 	public void setServerhost(String hostname){

@@ -47,6 +47,10 @@ public class APIHttpHandler implements HttpHandler {
 						
 						String ua = URLDecoder.decode(params[i+1], "UTF-8");
 						
+						if(ua == null){
+							ua = "";
+						}
+						
 						HashMap<String, String> hm = client.getAttributes(ua);
 											
 						String result = gson.toJson(hm);
