@@ -21,7 +21,7 @@
 package org.openddr.simpleapi.oddr.vocabulary;
 
 import java.util.Map;
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.openddr.simpleapi.oddr.cache.Cache;
 import org.openddr.simpleapi.oddr.cache.CacheImpl;
 import org.openddr.simpleapi.oddr.model.vocabulary.Vocabulary;

@@ -15,6 +15,8 @@ import com.sun.net.httpserver.HttpServer;
  *
  */
 public class OpenDDRServer {
+	private static long translatedUACount;
+	
 	public static void main(String[] args) throws IOException {
 	    InetSocketAddress addr = new InetSocketAddress(Configuration.SERVER_PORT);
 	    HttpServer server = HttpServer.create(addr, 0);
@@ -32,4 +34,13 @@ public class OpenDDRServer {
 	    server.start();
 	    System.out.println("Server is listening on port " + Configuration.SERVER_PORT );
 	  }
+
+	public static long getTranslatedUAcount() {
+		return translatedUACount;
+	}
+	
+	public static void incrementHandleCount(){
+		++translatedUACount;
+	}
+
 }

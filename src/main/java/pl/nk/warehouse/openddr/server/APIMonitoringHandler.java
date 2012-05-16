@@ -16,9 +16,10 @@ public class APIMonitoringHandler implements HttpHandler {
 			responseHeaders.set("Content-Type", "text/plain");
 			exchange.sendResponseHeaders(200, 0);
 			OutputStream responseBody = exchange.getResponseBody();
-			responseBody.write("OK".getBytes());
+			responseBody.write("OK\n".getBytes());
+			responseBody.write("translated useragents:".getBytes());
+			responseBody.write(String.valueOf(OpenDDRServer.getTranslatedUAcount()).getBytes());
 			responseBody.close();
 		}
 	}
-
 }

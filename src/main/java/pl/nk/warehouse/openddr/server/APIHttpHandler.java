@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
 
 /**
  * Simple requests handler - if parameter matches configured name, forwards useragent to OpenDDR API client
@@ -54,7 +55,7 @@ public class APIHttpHandler implements HttpHandler {
 						HashMap<String, String> hm = client.getAttributes(ua);
 											
 						String result = gson.toJson(hm);
-						
+						OpenDDRServer.incrementHandleCount();
 						responseBody.write(result.getBytes());
 					}
 				}
