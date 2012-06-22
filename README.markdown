@@ -17,7 +17,7 @@ example result is:
 #DEVELOPMENT MANUAL:
 example pom.xml can be found here: https://gist.github.com/1760081
 
-1. download OpenDDR-1.0.0.2.zip from http://openddr.org
+1. download OpenDDR-1.0.0.2.zip from http://openddr.org (please use latest version, and change it below to match)
 
 2. unpack it
 
